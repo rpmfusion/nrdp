@@ -3,8 +3,8 @@
 # - bootstrap 4.0.0-beta2
 
 Name:    nrdp
-Version: 1.5.1
-Release: 6%{?dist}
+Version: 1.5.2
+Release: 1%{?dist}
 Summary: Nagios Remote Data Processor
 
 # NRDP php client is BSD
@@ -42,6 +42,7 @@ A shell script to send NRDP data to a Nagios server.
 
 %package client-php
 Summary: Send NRDP php script for Nagios
+License: BSD
 %description client-php
 A php script to send NRDP data to a Nagios server.
 
@@ -87,27 +88,31 @@ install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
 
 
 %files
-%license LICENSE.rst
-%doc CHANGES.rst README.rst
+%license LICENSE.md
+%doc CHANGES.md README.md
 %{_datadir}/%{name}/
 %dir %{_sysconfdir}/%{name}/
 %config(noreplace) %{_sysconfdir}/%{name}/config.inc.php
 %config(noreplace) %{_sysconfdir}/httpd/conf.d/nrdp.conf
 
 %files client-shell
-%license LICENSE.rst
+%license LICENSE.md
 %{_bindir}/send_nrdp.sh
 
 %files client-php
-%license LICENSE.rst
+%license LICENSE.md
 %{_bindir}/send_nrdp.php
 
 %files client-python
-%license LICENSE.rst
+%license LICENSE.md
 %{_bindir}/send_nrdp.py
 
 
 %changelog
+* Wed Sep 12 2018 Xavier Bachelot <xavier@bachelot.org> 1.5.2-1
+- Update to 1.5.2.
+- Fix License: tag for php client sub-package.
+
 * Sun Aug 19 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.5.1-6
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
