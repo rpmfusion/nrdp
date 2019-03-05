@@ -4,7 +4,7 @@
 
 Name:    nrdp
 Version: 1.5.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Nagios Remote Data Processor
 
 # NRDP php client is BSD
@@ -109,6 +109,9 @@ install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
 
 
 %changelog
+* Tue Mar 05 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.5.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Wed Sep 12 2018 Xavier Bachelot <xavier@bachelot.org> 1.5.2-1
 - Update to 1.5.2.
 - Fix License: tag for php client sub-package.
