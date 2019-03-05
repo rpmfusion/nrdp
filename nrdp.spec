@@ -4,7 +4,7 @@
 
 Name:    nrdp
 Version: 1.5.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Nagios Remote Data Processor
 
 # NRDP php client is BSD
@@ -59,7 +59,7 @@ chmod a-x server/includes/bootstrap.bundle.min.js
 chmod a-x server/includes/bootstrap.min.css
 chmod a-x server/includes/jquery-3.2.1.min.js
 # Fix shebang
-sed -i -e '1d;2i#!/usr/bin/python' clients/send_nrdp.py
+sed -i -e '1d;2i#!/usr/bin/python2' clients/send_nrdp.py
 # Fix EOL
 sed -i "s|\r||g" clients/send_nrdp.php
 
@@ -109,6 +109,9 @@ install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
 
 
 %changelog
+* Tue Mar 05 2019 Xavier Bachelot <xavier@bachelot.org> 1.5.2-3
+- Mark python client as python2.
+
 * Tue Mar 05 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.5.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
