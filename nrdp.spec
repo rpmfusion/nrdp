@@ -127,6 +127,11 @@ rm %{buildroot}%{_bindir}/send_nrdp_py2.py
 
 
 %changelog
+* Sun Sep 22 2024 Xavier Bachelot <xavier@bachelot.org> 2.0.2-1
+- Update to 2.0.6 (Re-licensed to GPLv3)
+- Unbundle jquery
+- Drop EL6 support
+
 * Sat Aug 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.5.2-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
