@@ -1,16 +1,17 @@
-# TODO: unbundle JS from server/includes
-# - jquery 3.2.1
-# - bootstrap 4.0.0-beta2
+# TODO: Unbundle JS from server/includes
+#  - jquery 3.6.0 (Done for Fedora)
+#  - bootstrap 4.6.0
+
+%global unbundle_jquery 0%{?fedora}%{?el8}%{?el9}%{?el10}
 
 Name:    nrdp
-Version: 1.5.2
-Release: 14%{?dist}
+Version: 2.0.6
+Release: 1%{?dist}
 Summary: Nagios Remote Data Processor
 
-# NRDP php client is BSD
 # Bundled jquery and boostrap are MIT
-# Everything else is Nagios Open Software License (which is non-free)
-License: Nagios Open Software License and BSD and MIT
+# Everything else is GPLv3
+License: GPL-3.0-only and MIT
 URL:     https://github.com/NagiosEnterprises/nrdp
 Source0: https://github.com/NagiosEnterprises/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1: %{name}-httpd.conf
@@ -27,8 +28,8 @@ Requires: php(httpd)
 Requires: mod_php
 %endif
 
-Provides: bundled(js-jquery) = 3.2.1
-Provides: bundled(js-bootstrap) = 4.0.0
+Provides: bundled(js-jquery) = 3.6.0
+Provides: bundled(js-bootstrap) = 4.6.0
 
 
 %description
@@ -46,7 +47,6 @@ A shell script to send NRDP data to a Nagios server.
 
 %package client-php
 Summary: Send NRDP php script for Nagios
-License: BSD
 %description client-php
 A php script to send NRDP data to a Nagios server.
 
@@ -59,11 +59,12 @@ A python script to send NRDP data to a Nagios server.
 %prep
 %setup -q
 # Fix perms
-chmod a-x server/includes/bootstrap.bundle.min.js
-chmod a-x server/includes/bootstrap.min.css
-chmod a-x server/includes/jquery-3.2.1.min.js
+chmod a-x server/includes/bootstrap-4.6.0.bundle.min.js
+chmod a-x server/includes/bootstrap-4.6.0.min.css
+chmod a-x server/includes/jquery-3.6.0.min.js
 # Fix shebang
-sed -i -e '1d;2i#!/usr/bin/python2' clients/send_nrdp.py
+sed -i -e '1d;2i#!/usr/bin/python3' clients/send_nrdp.py
+sed -i -e '1d;2i#!/usr/bin/python2' clients/send_nrdp_py2.py
 # Fix EOL
 sed -i "s|\r||g" clients/send_nrdp.php
 
@@ -78,7 +79,7 @@ mkdir -p %{buildroot}%{_datadir}/%{name}/
 rm -f  server/config.inc.php
 cp -pr server/*  %{buildroot}%{_datadir}/%{name}/
 ln -s %{_sysconfdir}/%{name}/config.inc.php \
-    ${RPM_BUILD_ROOT}%{_datadir}/%{name}/config.inc.php
+    %{buildroot}%{_datadir}/%{name}/config.inc.php
 # Server conf file
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}/
 install -m 0644 -D -p %{SOURCE2} %{buildroot}%{_sysconfdir}/%{name}/config.inc.php
