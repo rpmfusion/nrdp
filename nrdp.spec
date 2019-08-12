@@ -28,7 +28,12 @@ Requires: php(httpd)
 Requires: mod_php
 %endif
 
+%if %{unbundle_jquery}
+BuildRequires: js-jquery3 >= 3.6.0
+Requires:      js-jquery3 >= 3.6.0
+%else
 Provides: bundled(js-jquery) = 3.6.0
+%endif
 Provides: bundled(js-bootstrap) = 4.6.0
 
 
@@ -87,6 +92,12 @@ install -m 0644 -D -p %{SOURCE2} %{buildroot}%{_sysconfdir}/%{name}/config.inc.p
 mkdir -p %{buildroot}%{_sysconfdir}/httpd/conf.d/
 install -m 0644 -D -p %{SOURCE1} \
     %{buildroot}%{_sysconfdir}/httpd/conf.d/nrdp.conf
+# Unbundle jquery
+%if %{unbundle_jquery}
+rm -f %{buildroot}%{_datadir}/%{name}/includes/jquery-3.6.0.min.js
+ln -s %{_datadir}/javascript/jquery/3/jquery.min.js \
+    %{buildroot}%{_datadir}/%{name}/includes/jquery-3.6.0.min.js
+%endif
 # Client scripts
 mkdir -p %{buildroot}%{_bindir}/
 install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
