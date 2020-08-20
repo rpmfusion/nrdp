@@ -4,7 +4,7 @@
 
 Name:    nrdp
 Version: 1.5.2
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: Nagios Remote Data Processor
 
 # NRDP php client is BSD
@@ -21,7 +21,11 @@ BuildArch: noarch
 Requires: nagios
 # For clarity since Nagios should pull them
 Requires: httpd
+%if 0%{?fedora} || 0%{?rhel} > 6
+Requires: php(httpd)
+%else
 Requires: mod_php
+%endif
 
 Provides: bundled(js-jquery) = 3.2.1
 Provides: bundled(js-bootstrap) = 4.0.0
@@ -109,6 +113,9 @@ install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
 
 
 %changelog
+* Thu Aug 20 2020 Xavier Bachelot <xavier@bachelot.org> 1.5.2-7
+- Replace dependency on mod_php with php(httpd) for all but EL6
+
 * Wed Aug 19 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.5.2-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
