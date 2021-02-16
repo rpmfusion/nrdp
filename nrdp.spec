@@ -22,11 +22,7 @@ BuildArch: noarch
 Requires: nagios
 # For clarity since Nagios should pull them
 Requires: httpd
-%if 0%{?fedora} || 0%{?rhel} > 6
 Requires: php(httpd)
-%else
-Requires: mod_php
-%endif
 
 %if %{unbundle_jquery}
 BuildRequires: js-jquery3 >= 3.6.0
