@@ -97,6 +97,9 @@ ln -s %{_datadir}/javascript/jquery/3/jquery.min.js \
 # Client scripts
 mkdir -p %{buildroot}%{_bindir}/
 install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
+%if 0%{?fedora} >= 41 || 0%{?rhel} >= 10
+rm %{buildroot}%{_bindir}/send_nrdp_py2.py
+%endif
 
 
 %files
@@ -118,6 +121,9 @@ install -m 0755 -D -p clients/* %{buildroot}%{_bindir}/
 %files client-python
 %license LICENSE.md
 %{_bindir}/send_nrdp.py
+%if ( 0%{?fedora} && 0%{?fedora} < 41 ) || ( 0%{?rhel} && 0%{?rhel} < 10 )
+%{_bindir}/send_nrdp_py2.py
+%endif
 
 
 %changelog
