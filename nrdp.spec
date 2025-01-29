@@ -6,7 +6,7 @@
 
 Name:    nrdp
 Version: 2.0.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Nagios Remote Data Processor
 
 # Bundled jquery and boostrap are MIT
@@ -127,6 +127,9 @@ rm %{buildroot}%{_bindir}/send_nrdp_py2.py
 
 
 %changelog
+* Wed Jan 29 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.0.6-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
 * Sun Sep 22 2024 Xavier Bachelot <xavier@bachelot.org> 2.0.2-1
 - Update to 2.0.6 (Re-licensed to GPLv3)
 - Unbundle jquery
